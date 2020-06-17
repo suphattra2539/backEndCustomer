@@ -9,6 +9,7 @@ using System.Data.Entity;
 using WebApplication1.Models;
 using System.Web.UI.WebControls;
 using WebApplication1.Models.ViewModel;
+using System.Reflection.Emit;
 
 namespace WebApplication1.Controllers
 {
@@ -21,21 +22,25 @@ namespace WebApplication1.Controllers
         {
             var products = db.Products.Select(x => new Product_TestViewModel
             {
-                ID_Product = x.ProductID,
-                Name_P = x.Name,
-                Price_P = x.Price,
+                ProductID = x.ProductID,
+                Name = x.Name,
+                Price = x.Price,
             }).ToList();
             return products;
         }
 
         public IHttpActionResult GetProducts(int id)
         {
+            if (id == 0)
+            {
+                return Ok(new Product_TestViewModel());
+            }
             var product = db.Products.Where(prod => prod.ProductID == id).Select(x => new Product_TestViewModel() 
             {
 
-                ID_Product = x.ProductID,
-                Name_P = x.Name,
-                Price_P = x.Price,
+                ProductID = x.ProductID,
+                Name = x.Name,
+                Price = x.Price,
             }).FirstOrDefault();
             if (product == null)
             {
@@ -48,14 +53,19 @@ namespace WebApplication1.Controllers
             
         }
 
-        public IHttpActionResult updateProduct(int id, Product_TestViewModel productView)
+        public IHttpActionResult updateProduct(int id, ProductEditViesModel productView)
         {
             var productUp = db.Products.Where(x => x.ProductID == id).FirstOrDefault();
 
             if (productUp != null)
             {
-                productUp.Name = productView.Name_P;
-                productUp.Price = productView.Price_P;
+                productUp.Name = productView.Name;
+                productUp.Price = productView.Price;
+                db.SaveChanges();
+            }
+            else
+            {
+                return BadRequest("error");
             }
             return Ok(productUp);
         }

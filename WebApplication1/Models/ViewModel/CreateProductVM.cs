@@ -7,7 +7,7 @@ namespace WebApplication1.Models.ViewModel
 {
     public class CreateProductVM
     {
-        public string Name_P { get; set; }
-        public int? Price_P { get; set; }
+        public string name { get; set; }
+        public int? price { get; set; }
     }
 }

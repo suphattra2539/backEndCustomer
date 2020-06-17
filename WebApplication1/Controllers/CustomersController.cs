@@ -29,18 +29,24 @@ namespace WebApplication1.Controllers
              {
                  Id = x.CustomerID,
                  Name = x.Name,
+                 Age = x.Age
              }).ToList();
              return customers;
          }
         public IHttpActionResult GetCustomer(int id )
         {
 
-            CustomerViewModel1 kon = new CustomerViewModel1(999);
+            CustomerViewModel1 kon = new CustomerViewModel1();
             kon.Run();
+            if (id == 0 )
+            {
+                return Ok(new CustomerViewModel());
+            }
             var customer = db.Customers.Where(prod => prod.CustomerID == id).Select(x => new CustomerViewModel()
             {
                 Id = x.CustomerID,
                 Name = x.Name,
+                Age = x.Age,
                 Orders = x.Orders.Select(o => new OrderViewModel()
                 {
                     OrderId = o.OrderID,
@@ -117,8 +123,13 @@ namespace WebApplication1.Controllers
             {
                 Update.Name = customer.Name;
                 Update.Age = customer.Age;
+                db.SaveChanges();
             }
-            db.SaveChanges();
+            else
+            {
+                return BadRequest("error");
+            }
+            
             return Ok(Update);
 
         }
@@ -136,14 +147,20 @@ namespace WebApplication1.Controllers
          }*/
         public IHttpActionResult deleteCustomertest(int id)
         {
-            var delete = db.CustomersDeletes.Where(x => x.ID == id).FirstOrDefault();
+            var delete = db.Customers.Where(x => x.CustomerID == id).FirstOrDefault();
             if (delete != null)
             {
-                db.CustomersDeletes.Remove(delete);
-               // db.Entry(delete).State = System.Data.Entity.EntityState.Deleted;
-            };
+                db.Customers.Remove(delete);
+                db.SaveChanges();
 
-            db.SaveChanges();
+                //db.Entry(delete).State = System.Data.Entity.EntityState.Deleted;
+            }
+            else
+            {
+                return BadRequest("error");
+            }
+
+            
             return Ok(delete + "OK");
         }
         /* public IHttpActionResult UpdateData(int id, string name, string category, int price  )

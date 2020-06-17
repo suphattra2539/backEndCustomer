@@ -8,9 +8,14 @@ namespace WebApplication1.Models.ViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public int? Age { get; set; }
         public List<OrderViewModel> Orders { get; set; }
         //  public int MyProperty { get; set; }
+        public CustomerViewModel()
+        {
 
+        }
     }
 
 }
