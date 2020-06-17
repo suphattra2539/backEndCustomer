@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>test S</title>
+</head>
+<body>
+    <p> Title Hello ??</p>
+    <div id="mydiv" class="">
+        <h2>Product All</h2>
+        <ul id="products">
+        </ul>
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="prodId" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="product " />
+
+    </div>
+    
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/product';
+        //life cycle
+
+        $(document).ready(function () {
+
+            $.getJSON(uri)
+                .done(function (data) {
+                    $.eact(data, function (key, item) {
+                        var litag = $('<li>', { text: formatItem(item) })
+                        //$('#products') document.getElementById("products");
+                        litag.appendTo($('#products'));
+                    });
+                });
+        });
+
+        function formatItem(item) {
+            return item.Name + ": $" + item.Price;
+        }
+
+        function find() {
+            var id = $('#prodId').val();
+            $.getJSON(uri + '/' + id)
+                .done(function (data) {
+                    $('#prodId').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#product').text('Error: ' + err)
+                });
+        }
+
+    </script>
+
+</body>
+</html>

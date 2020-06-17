@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f1f0c6988b8452c93a3f2fd9384d98c" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="ExamsModel.Customer_C" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ExamsModel.Customer" Width="1.5" PointX="2.75" PointY="5" />
+        <EntityTypeShape EntityType="ExamsModel.CustomersDelete" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ExamsModel.CustomersGetId" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ExamsModel.OrderDetail" Width="1.5" PointX="7.25" PointY="4.875" />
+        <EntityTypeShape EntityType="ExamsModel.Order" Width="1.5" PointX="5" PointY="4.875" />
+        <EntityTypeShape EntityType="ExamsModel.Orders_Test" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="ExamsModel.Product_Test" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ExamsModel.Product" Width="1.5" PointX="5" PointY="8" />
+        <AssociationConnector Association="ExamsModel.FK_Orders_Test_Customer_C" />
+        <AssociationConnector Association="ExamsModel.FK_Orders_Customers" />
+        <AssociationConnector Association="ExamsModel.FK_OrderDetails_Orders" />
+        <AssociationConnector Association="ExamsModel.FK_OrderDetails_Products" />
+        <AssociationConnector Association="ExamsModel.FK_Orders_Test_Product_Test" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
